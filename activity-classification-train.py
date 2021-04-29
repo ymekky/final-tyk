@@ -23,7 +23,7 @@ import scipy
 
 print("Loading data...")
 sys.stdout.flush()
-data_file = 'my-orientation-data.csv'
+data_file = 'orientation_and_gravity.csv'
 data = np.genfromtxt(data_file, delimiter=',')
 print("Loaded {} raw labelled activity data samples.".format(len(data)))
 sys.stdout.flush()
