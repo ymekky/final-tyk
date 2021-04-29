@@ -25,7 +25,7 @@ def _compute_standard_deviation(window):
 def compute_magnitude(window):
     magnitude = []
     for i in range(len(window)):
-        magnitude.append(math.sqrt(window[i,0]**2+ window[i,1]**2+ window[i,2]**2))
+        magnitude.append(math.sqrt(window[i,1]**2+ window[i,2]**2+ window[i,4]**2 + window[i,5]**2))
     return np.array(magnitude)
 
 def _compute_magnitude_peaks(window):
@@ -41,15 +41,15 @@ def _compute_magnitude_dominant_frequency(window):
 
 #Compute FFT features - Dominant Frequency over X Axis
 def _compute_x_dominant_frequency(window):
-    return np.fft.rfft(window[:0]).astype(float)
+    return np.fft.rfft(window[:1]).astype(float)
 
 #Compute FFT features - Dominant Frequency over Y Axis
 def _compute_y_dominant_frequency(window):
-    return np.fft.rfft(window[:1]).astype(float)
+    return np.fft.rfft(window[:2]).astype(float)
 
 #Compute FFT features - Dominant Frequency over Z Axis
 def _compute_z_dominant_frequency(window):
-    return np.fft.rfft(window[:2]).astype(float)
+    return np.fft.rfft(window[:5]).astype(float)
 
 #Compute entropy
 def _entropy(window):
@@ -80,14 +80,22 @@ def extract_features(window):
     x.append(_compute_magnitude_peaks(window))
     x.append(_compute_magnitude_dominant_frequency(window))
     x.append(_entropy(window))
+    feature_names.append("yaw_mean")
     feature_names.append("x_mean")
     feature_names.append("y_mean")
+    feature_names.append("roll_mean")
+    feature_names.append("qw_mean")
     feature_names.append("z_mean")
+    feature_names.append("pitch_mean")
 
     # TODO: call functions to compute other features. Append the features to x and the names of these features to feature_names
+    feature_names.append("yaw_std")
     feature_names.append("x_std")
     feature_names.append("y_std")
+    feature_names.append("roll_std")
+    feature_names.append("qw_std")
     feature_names.append("z_std")
+    feature_names.append("pitch_std")
     feature_names.append("magnitude_peaks")
     feature_names.append("magnitude_dominant_frequency")
     feature_names.append("entropy")
