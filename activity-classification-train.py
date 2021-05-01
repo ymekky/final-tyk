@@ -52,11 +52,11 @@ reset_vars()
 #
 # -----------------------------------------------------------------------------
 
-window_size = 20
+window_size = 30
 step_size = 20
 
 # sampling rate should be about 25 Hz; you can take a brief window to confirm this
-n_samples = 1000
+n_samples = len(data)-1
 time_elapsed_seconds = (data[n_samples,0] - data[0,0]) / 1000
 sampling_rate = n_samples / time_elapsed_seconds
 

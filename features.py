@@ -62,7 +62,7 @@ def _compute_x_dominant_frequency(window):
 def _compute_y_dominant_frequency(window):
     return np.fft.rfft(window[:2]).astype(float)
 
-#Compute FFT features - Dominant Frequency over Z Axis
+#Compute FFT features - Dominant Frequency over Z Axis (gravity)
 def _compute_z_dominant_frequency(window):
     return np.fft.rfft(window[:5]).astype(float)
 
@@ -93,13 +93,14 @@ def extract_features(window):
     x = []
     feature_names = []
 
-    x.append(_compute_mean_features(window))
+    #x.append(_compute_mean_features(window))
     x.append(_compute_standard_deviation(window))
     x.append(_compute_orientation_magnitude_peaks(window))
-    x.append(_compute_gravity_magnitude_peaks(window))
+    #x.append(_compute_gravity_magnitude_peaks(window))
     x.append(_compute_orientation_magnitude_dominant_frequency(window))
-    x.append(_compute_gravity_magnitude_dominant_frequency(window))
+    #x.append(_compute_gravity_magnitude_dominant_frequency(window))
     x.append(_entropy(window))
+    '''
     feature_names.append("yaw_mean")
     feature_names.append("qx_mean")
     feature_names.append("qy_mean")
@@ -110,8 +111,9 @@ def extract_features(window):
     feature_names.append("z_mean")
     feature_names.append("y_mean")
     feature_names.append("x_mean")
-
+'''
     # TODO: call functions to compute other features. Append the features to x and the names of these features to feature_names
+    
     feature_names.append("yaw_std")
     feature_names.append("qx_std")
     feature_names.append("qy_std")
@@ -122,10 +124,11 @@ def extract_features(window):
     feature_names.append("z_std")
     feature_names.append("y_std")
     feature_names.append("x_std")
+    
     feature_names.append("orientantion_magnitude_peaks")
-    feature_names.append("gravity_magnitude_peaks")
+    #feature_names.append("gravity_magnitude_peaks")
     feature_names.append("orientation_magnitude_dominant_frequency")
-    feature_names.append("gravity_magnitude_dominant_frequency")
+    #feature_names.append("gravity_magnitude_dominant_frequency")
     feature_names.append("entropy")
     
     feature_vector = np.concatenate(x, axis=0) # convert the list of features to a single 1-dimensional vector
